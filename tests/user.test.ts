@@ -77,7 +77,7 @@ describe("User Controller", () => {
         name: "User One",
         age: 20,
         city: "City One",
-        zipCode: "123123",
+        zipCode: "11111",
         password: "123456",
       },
     ];
@@ -96,7 +96,60 @@ describe("User Controller", () => {
 
     const response = await request(app).put("/update").send(userData);
     expect(response.status).toBe(200);
-
-    expect(response.body.response.message[0]).toEqual(userData);
+    console.log(response.body.respons);
+    expect(response.body.response.message.data[0]).toEqual(userData);
   });
+
+  //   it("should update user using patch method", async () => {
+  //     const mockUsers = [
+  //       {
+  //         _id: "1",
+  //         email: "user1@example.com",
+  //         name: "User One",
+  //         age: 20,
+  //         city: "City One",
+  //         zipCode: "11111",
+  //         password: "123456",
+  //       },
+  //     ];
+
+  //     const userData = {
+  //       _id: "1",
+  //       email: "user1@example.com",
+  //       name: "User One",
+  //       age: 20,
+  //       city: "City One",
+  //       zipCode: "11111",
+  //       password: "123456",
+  //     };
+
+  //     (UserService.updateUserPut as jest.Mock).mockResolvedValue(mockUsers);
+
+  //     const response = await request(app)
+  //       .put("/api/v1/worko/user/update_user/1")
+  //       .send(userData);
+  //     expect(response.status).toBe(200);
+  //     expect(response.body.data[0].email).toEqual(userData.email);
+  //   });
+
+  //   it("should user soft deleted", async () => {
+  //     const mockUsers = [
+  //       {
+  //         _id: "1",
+  //         email: "user1@example.com",
+  //         name: "User One",
+  //         age: 20,
+  //         city: "City One",
+  //         zipCode: "11111",
+  //         isDelete: false,
+  //         password: "123456",
+  //       },
+  //     ];
+  //     (UserService.softDeleteUser as jest.Mock).mockResolvedValue(mockUsers);
+
+  //     const response = await request(app).patch(
+  //       `/api/v1/worko/user/soft_delete/1`
+  //     );
+  //     expect(response.status).toBe(200);
+  //   });
 });
