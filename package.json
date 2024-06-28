@@ -7,12 +7,24 @@
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "webpack --config webpack.config.js --mode development",
     "webdev": "nodemon ./dist/main.js",
-    "start": "ts-node-dev ./src/index.ts"
+    "start": "ts-node-dev ./src/index.ts",
+    "test": "jest --runInBand --coverage --detectOpenHandles --testTimeout=10000 "
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "collectCoverage": true,
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.ts"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/cookie-session": "^2.0.49",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^8.3.8",
+    "@types/mongoose": "^5.11.97",
     "async": "^3.2.5",
     "bcrypt": "^5.1.1",
     "cookie-session": "^2.1.0",
@@ -25,9 +37,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.4",
     "nodemon": "^3.1.4",
-    "@types/express": "^4.17.21",
-    "@types/jsonwebtoken": "^8.3.8",
-    "@types/mongoose": "^5.11.97",
     "ts-node-dev": "^2.0.0"
   },
   "devDependencies": {

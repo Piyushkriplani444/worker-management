@@ -10,7 +10,7 @@ export const createNewUser = async (payload: UserDoc): Promise<UserDoc> => {
   }
 };
 
-export const updateUserPut = async (userinfo: UserDoc, id: string) => {
+export const updateUser = async (userinfo: UserDoc, id: string) => {
   try {
     const result = await User.findByIdAndUpdate({ _id: id }, userinfo, {
       new: true,

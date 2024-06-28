@@ -13,7 +13,7 @@ import { currentUser } from "../middleware/jwtAuthentication";
 
 const routes = express.Router();
 
-routes.get("/get_user", currentUser, getUsers);
+routes.get("/get_users", currentUser, getUsers);
 
 routes.get("/worko/user/:userId", currentUser, getUser);
 

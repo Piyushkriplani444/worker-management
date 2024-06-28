@@ -21,6 +21,9 @@ export const currentUser = async (
   res: Response,
   next: NextFunction
 ) => {
+  if (!req.headers?.cookie) {
+    next();
+  }
   try {
     const accessToken = req.headers?.cookie || "";
     let token = accessToken?.split("=")[1];

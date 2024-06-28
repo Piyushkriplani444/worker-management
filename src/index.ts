@@ -2,8 +2,7 @@ import express, { Request, Response } from "express";
 import connectToMongoDB from "./connect";
 import dotenv from "dotenv";
 import cookieSession from "cookie-session";
-import { UserRouter } from "./routes/user";
-import { AuthRouter } from "./routes/auth";
+import { Routers } from "./common.router";
 dotenv.config();
 
 const mongodb = process.env.MONGO_CONNECT;
@@ -26,9 +25,10 @@ connectToMongoDB(mongodb as string)
   .then(() => console.log("Mongodb connectttt"))
   .catch(() => console.log("Mongodb error"));
 
-app.use("/", UserRouter);
-app.use("/", AuthRouter);
+// app.use("/", UserRouter);
+// app.use("/", AuthRouter);
 
+app.use("/", Routers);
 // app.get("/", (req: Request, res: Response) => {
 //   res.status(200).send("<h1>Hello world</h1>");
 // });
