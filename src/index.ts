@@ -1,12 +1,21 @@
 import express, { Request, Response } from "express";
 import connectToMongoDB from "./connect";
 import dotenv from "dotenv";
+import cookieSession from "cookie-session";
 dotenv.config();
 
 const mongodb: string | undefined = process.env.MONGO_CONNECT;
 const port = process.env.PORT || 3000;
 
 const app = express();
+
+app.set("trust proxy", true);
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

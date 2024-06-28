@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const createWorker = Joi.object({
+const createUser = Joi.object({
   email: Joi.string().email().required().message({
     "any.required": "Email is Required",
   }),
@@ -10,7 +10,7 @@ const createWorker = Joi.object({
     .message({ "any.required": "zipCode is Required " }),
 });
 
-const updateWorker = Joi.object({
+const updateUser = Joi.object({
   email: Joi.string().email().required().message({
     "any.required": "Email is Required",
   }),
@@ -21,6 +21,6 @@ const updateWorker = Joi.object({
 });
 
 export const validator = {
-  createWorker,
-  updateWorker,
+  createUser,
+  updateUser,
 };
