@@ -5,6 +5,7 @@ import { createJWT } from "../helper/jwtToken";
 
 export async function loginService(payload: any) {
   try {
+    console.log(payload);
     const { email, password } = payload;
 
     const existUser = await User.findOne({ email: email });
@@ -14,7 +15,7 @@ export async function loginService(payload: any) {
 
     const passwordMatch = await Password.compare(existUser.password, password);
     if (!passwordMatch) {
-      throw new Error("Invalid credentials");
+      throw new Error("Invalid credentials").message;
     }
 
     const userJWT = createJWT(existUser);

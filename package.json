@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "webpack --config webpack.config.js --mode development",
-    "webdev": "nodemon ./dist/main.js"
+    "webdev": "nodemon ./dist/main.js",
+    "start": "ts-node-dev ./src/index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +24,11 @@
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.4",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^8.3.8",
+    "@types/mongoose": "^5.11.97",
+    "ts-node-dev": "^2.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

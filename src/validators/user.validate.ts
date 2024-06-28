@@ -1,24 +1,24 @@
-const Joi = require("joi");
+import Joi from "joi";
 
 const createUser = Joi.object({
-  email: Joi.string().email().required().message({
+  email: Joi.string().email().required().messages({
     "any.required": "Email is Required",
   }),
   zipCode: Joi.string()
-    .regex(/^\d{5}$/)
+    .regex(/^\d{6}$/)
     .required()
-    .message({ "any.required": "zipCode is Required " }),
-});
+    .messages({ "any.required": "zipCode is Required " }),
+}).unknown(true);
 
 const updateUser = Joi.object({
-  email: Joi.string().email().required().message({
+  email: Joi.string().email().required().messages({
     "any.required": "Email is Required",
   }),
   zipCode: Joi.string()
     .regex(/^\d{5}$/)
     .required()
-    .message({ "any.required": "zipCode is Required " }),
-});
+    .messages({ "any.required": "zipCode is Required " }),
+}).unknown(true);
 
 export const validator = {
   createUser,

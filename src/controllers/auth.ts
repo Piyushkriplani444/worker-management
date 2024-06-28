@@ -6,12 +6,13 @@ async function login(req: Request, res: Response) {
     const body: { email: string; password: string } = req.body;
 
     const userJwt = await loginService(body);
+    console.log("userjwt", userJwt);
     req.session = {
       jwt: userJwt,
     };
     okResponse(req, res, "Login Successfull");
   } catch (error) {
-    badRequestResponse(req, res, "Something went wrong ");
+    badRequestResponse(req, res, error);
   }
 }
 
