@@ -7,9 +7,11 @@ async function login(req: Request, res: Response) {
 
     const userJwt = await loginService(body);
     console.log("userjwt", userJwt);
-    req.session = {
-      jwt: userJwt,
-    };
+    res.cookie("accessToken", userJwt, {
+      httpOnly: true,
+      secure: true,
+    });
+
     okResponse(req, res, "Login Successfull");
   } catch (error) {
     badRequestResponse(req, res, error);

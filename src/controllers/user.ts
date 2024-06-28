@@ -58,9 +58,10 @@ export const updateUserPatch = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
   try {
+    console.log("delete user");
     const { id } = req.body;
     const result = await UserServices.softDelete(id);
-    okResponse(req, res, result);
+    return okResponse(req, res, result);
   } catch (error) {
     badRequestResponse(req, res, error);
   }

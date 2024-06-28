@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import { badRequestResponse } from "../helper/customMessage";
+import { User } from "../models/user";
 
 interface UserPayload {
   id: string;
@@ -15,22 +16,29 @@ declare global {
   }
 }
 
-export const currentUser = (
+export const currentUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  if (!req.session?.jwt) {
-    return next();
-  }
   try {
-    const payload = jwt.verify(
-      req.session.jwt,
-      process.env.JWT_KEY!
-    ) as UserPayload;
-    req.currentUser = payload;
+    const accessToken = req.headers?.cookie || "";
+    let token = accessToken?.split("=")[1];
+
+    if (!token) {
+      throw new Error("You are not authorized to access");
+    }
+
+    const payload = jwt.verify(token, process.env.JWT_KEY!) as JwtPayload;
+
+    const { userEmail } = payload;
+    const isExistUser = await User.findOne({ email: userEmail });
+    if (isExistUser?.email !== userEmail) {
+      throw new Error("Forbidden");
+    }
+
+    next();
   } catch (error) {
-    badRequestResponse(req, res, error);
+    next(error);
   }
-  next();
 };
