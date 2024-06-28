@@ -15,7 +15,7 @@ const updateUser = Joi.object({
     "any.required": "Email is Required",
   }),
   zipCode: Joi.string()
-    .regex(/^\d{5}$/)
+    .regex(/^\d{6}$/)
     .required()
     .messages({ "any.required": "zipCode is Required " }),
 }).unknown(true);

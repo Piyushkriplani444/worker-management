@@ -1,20 +1,32 @@
 import express from "express";
-import { createUser } from "../controllers/user";
+import {
+  createUser,
+  updateUser,
+  updateUserPatch,
+  deleteUser,
+  getUser,
+  getUsers,
+} from "../controllers/user";
 import { validator } from "../validators/user.validate";
 import { schemaValidator } from "../middleware/schemaValidator";
-// import { createNewUser } from "../services/user.service";
+import { currentUser } from "../middleware/jwtAuthentication";
 
 const routes = express.Router();
 
-// routes.get("/list_work");
+routes.get("/get_user", currentUser, getUsers);
 
-// routes.get('/worko/user/:userId');
+routes.get("/worko/user/:userId", currentUser, getUser);
 
 routes.post("/create", schemaValidator(validator.createUser), createUser);
-// routes.put('/update')
+routes.put(
+  "/update",
+  schemaValidator(validator.updateUser),
+  currentUser,
+  updateUser
+);
 
-// routes.patch('/update-user')
+routes.patch("/update", currentUser, updateUserPatch);
 
-// routes.delete('/delete-user')
+routes.delete("/delete", currentUser, deleteUser);
 
 export const UserRouter = routes;
