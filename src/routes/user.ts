@@ -1,4 +1,4 @@
-const routes = require("express").Router();
+import express from "express";
 
 // routes.get('/list_work')
 
